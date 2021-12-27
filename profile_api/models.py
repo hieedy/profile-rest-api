@@ -7,6 +7,11 @@ from django.contrib.auth.models import BaseUserManager
 #managers
 class UserProfileManager(BaseUserManager):
     """Manager for UserProfile """
+
+    # Another thing to note is that Manager methods
+    # can access self.model to get the model class to which
+    # they’re attached.
+
     def create_user(self,email,name,password=None):
         """Create a new user profile"""
 
@@ -15,7 +20,8 @@ class UserProfileManager(BaseUserManager):
 
         #normalizing email's second half i.e will convert to lower case the @ part of the email id
         email = self.normalize_email(email)
-        user = self.model(email = email , name = name)
+        user = self.model(email = email , name = name) #returning object of model to which it is linked
+
         user.set_password(password) #to encrypt the password
         user.save(using = self._db)
 
