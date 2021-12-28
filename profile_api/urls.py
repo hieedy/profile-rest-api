@@ -16,9 +16,8 @@ urlpatterns = [
 
     #Because Django’s URL resolver expects to send the request and associated arguments to a callable function, not a class, class-#based views have an as_view() class method which returns a function that can be called when a request arrives for a URL #matching the associated pattern. The function creates an instance of the class, calls setup() to initialize its attributes, and #then calls its dispatch() method. dispatch looks at the request to determine whether it is a GET, POST, etc, and relays the #request to a matching method if one is defined, or raises HttpResponseNotAllowed if not
     path('hello-view', views.HelloApiView.as_view()), #as_view provide entry to class based view that we have created
+    path('login/', views.UserLoginApiView.as_view()),
     path('', include(router.urls)),
-    path('',include(router.urls))
-
 
 
 ]
