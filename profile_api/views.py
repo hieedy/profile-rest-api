@@ -3,8 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
 
 from profile_api import serializers
+from profile_api import models
+from profile_api import permissions
 
 #there are two wasy to create view using django rest rest_framework
 #using APIView and second ViewSet
@@ -117,5 +120,11 @@ class HelloViewSet(viewsets.ViewSet):
 
 
 
+# using ModelViewSet
+class  UserProfileViewSet(viewsets.ModelViewSet):
+    """Handle creating and updating profiles"""
 
-        
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnProfile,)
