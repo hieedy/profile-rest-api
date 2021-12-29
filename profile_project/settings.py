@@ -25,7 +25,7 @@ SECRET_KEY = '!1+9s)%5vy_0m9b#^(n9$#=x-l0g3wo-ak(&3(^k9x0969x+ms'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','my-drf-rest-api.herokuapp.com']
 
 
 # Application definition
