@@ -11,6 +11,7 @@ router.register('hello-viewset', views.HelloViewSet, base_name = "hello-viewset"
 
 router.register('profiles', views.UserProfileViewSet) # preffer not to user base_name coz it will automatically get
 # base_name from the query_set
+router.register('feed', views.UserProfileFeedViewSet)
 
 urlpatterns = [
 

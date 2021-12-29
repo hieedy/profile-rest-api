@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.conf import settings
 
 
 #managers
@@ -73,5 +74,26 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
 
     def __str__(self):
         """Return string representation of the user """
-
         return self.email
+
+
+class ProfileFeedItem(models.Model):
+    """Profile status update"""
+
+    #in the ForeignKey as we knwo thatwe have to specify the model anme to which we want to link.
+    # here I can directly use 'UserProfile' model class to which  I want to linked
+    #but the best practices is always to get this name from settings file/
+    # so that if in fututre if we change user authentication model then we do not need to change
+    # every occurence of that in code. we can directly change in settings.py file and it will reflect everywhere.
+    
+    user_profile = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete = models.CASCADE
+    )
+    status_text = models.CharField(max_length = 255)
+    created_on = models.DateField(auto_now_add = True)
+
+
+    def __str__(self):
+        """Return the model as a a string """
+        return self.status_text
